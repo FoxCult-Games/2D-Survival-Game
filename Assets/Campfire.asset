@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be96834c415422b42b9b24b50cb95896, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: 
+  stagesAmount: 4
+  colors:
+  - {r: 0.735849, g: 0.24903943, b: 0.08677464, a: 1}
+  - {r: 0.7647059, g: 0.38082477, b: 0.062745094, a: 1}
+  - {r: 0.7830189, g: 0.55839986, b: 0.18836774, a: 1}
+  - {r: 0.8301887, g: 0.7916199, b: 0.4738341, a: 1}
+  unlitAnimation: {fileID: 7400000, guid: 8b54e192a1418084f9d20741bf962955, type: 2}
+  animations:
+  - {fileID: 7400000, guid: f625f5aa83a69284a92ad2919787df7b, type: 2}
+  - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
+  - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
+  - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
+  lifeTime: 3
+  heatRadius: 0
+  state: 0
+  hasBeenLit: 0
