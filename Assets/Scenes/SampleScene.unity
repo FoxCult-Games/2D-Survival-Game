@@ -874,6 +874,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 39f794be584364a4495d192fde608c09, type: 2}
+  onPlayerMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2079313056}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: Refocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &619826927
 Rigidbody2D:
   serializedVersion: 4
@@ -1104,6 +1119,7 @@ GameObject:
   - component: {fileID: 1132077490}
   - component: {fileID: 1132077491}
   - component: {fileID: 1132077492}
+  - component: {fileID: 1132077493}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Campfire
@@ -1208,7 +1224,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.6081227
+  m_Radius: 1.608123
 --- !u!114 &1132077491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1308,6 +1324,51 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1132077493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132077486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738c68e047452c14a929663d97289f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionTime: 2
+  isInteracting: 0
+  isInRange: 0
+  isFocused: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1132077487}
+        m_TargetAssemblyTypeName: Resources.Scripts.Campfire.CampfireController,
+          Assembly-CSharp
+        m_MethodName: Replenish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onIntersectionEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onIntersectionExit:
+    m_PersistentCalls:
+      m_Calls: []
+  drawGizmos: 1
+  defaultColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  intersectionColor: {r: 1, g: 0, b: 0, a: 1}
+  focusColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1238117751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,6 +1381,7 @@ GameObject:
   - component: {fileID: 1238117754}
   - component: {fileID: 1238117753}
   - component: {fileID: 1238117752}
+  - component: {fileID: 1238117756}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -1424,6 +1486,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1238117756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238117751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738c68e047452c14a929663d97289f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionTime: 2
+  isInteracting: 0
+  isInRange: 0
+  isFocused: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1238117752}
+        m_TargetAssemblyTypeName: Resources.Scripts.Resources.ResourceController,
+          Assembly-CSharp
+        m_MethodName: Collect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onIntersectionEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onIntersectionExit:
+    m_PersistentCalls:
+      m_Calls: []
+  drawGizmos: 1
+  defaultColor: {r: 0.9150943, g: 0.85421646, b: 0.15107687, a: 1}
+  intersectionColor: {r: 0.17007834, g: 0.8357694, b: 0.9245283, a: 1}
+  focusColor: {r: 0.34436604, g: 0.8962264, b: 0.114142045, a: 1}
 --- !u!1 &1536530719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,14 +1665,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829068184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.79335326, y: -0, z: -0, w: 0.60876167}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1132077489}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -105, y: 0, z: 0}
 --- !u!199 &1829068186
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -1587,7 +1694,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1612,7 +1719,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 124.2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -1629,7 +1736,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -1655,7 +1762,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -1774,7 +1881,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2267,7 +2374,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 32.79
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -2353,7 +2460,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.1
       mode: 0
       spread: 0
       speed:
@@ -2472,7 +2579,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 14
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -2578,7 +2685,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -2589,21 +2696,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 1
+          value: 0.9594574
+          inSlope: -2.4387
+          outSlope: -2.4387
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.11082473
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0
+          inSlope: -1.0895044
+          outSlope: -1.0895044
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.19845372
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -2902,7 +3009,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -2910,19 +3017,19 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.59343535, b: 0.16470587, a: 1}
+        key1: {r: 1, g: 0.8598621, b: 0.3160377, a: 1}
+        key2: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
+        key3: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+        key4: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
-        ctime4: 0
+        ctime1: 22552
+        ctime2: 46260
+        ctime3: 65535
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0
@@ -2935,7 +3042,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 4
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -6355,6 +6462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2079313054}
   - component: {fileID: 2079313053}
+  - component: {fileID: 2079313056}
   - component: {fileID: 2079313055}
   m_Layer: 0
   m_Name: GameManager
@@ -6375,8 +6483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cd6beba80c80f45880a0f103230148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryResources:
-  - {fileID: 0}
 --- !u!4 &2079313054
 Transform:
   m_ObjectHideFlags: 0
@@ -6405,3 +6511,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMessages: {fileID: 11400000, guid: 487bdd0550bd7c6408c5dabab3032665, type: 2}
+--- !u!114 &2079313056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079313052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31cb2f77f0579848ab863d974cd91a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusedInteractable: {fileID: 0}

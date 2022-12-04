@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Resources.Scripts.Resources
@@ -19,16 +15,9 @@ namespace Resources.Scripts.Resources
             resource.SetTransform(transform);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void Collect()
         {
-            if (other.gameObject.CompareTag("Player"))
-                ResourcesManagers.Instance.AddResourceInRange(resource);
-        }
-        
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-                ResourcesManagers.Instance.RemoveResourceInRange(resource);
+            resource.Collect();
         }
     }
 }

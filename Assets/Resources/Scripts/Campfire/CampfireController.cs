@@ -15,6 +15,7 @@ namespace Resources.Scripts.Campfire
 
         private Light2D _campfireLight;
         private Animator _campfireAnimator;
+        private ParticleSystem _campfireParticles;
         private float _lightIntensity;
         private float _lightRange;
         
@@ -36,6 +37,7 @@ namespace Resources.Scripts.Campfire
             Instance = this;
             
             _campfireGameObject = GameObject.FindGameObjectWithTag("Campfire");
+            _campfireParticles = _campfireGameObject.GetComponentInChildren<ParticleSystem>();
             
             _campfireLight = _campfireGameObject.GetComponent<Light2D>();
             _campfireAnimator = _campfireGameObject.GetComponent<Animator>();
@@ -48,7 +50,9 @@ namespace Resources.Scripts.Campfire
             
             OnCampfireLit += StartBurning;
             OnCampfireLit += ChangeState;
+            OnCampfireLit += EnableParticles;
             OnCampfireBurnedOut += StopBurning;
+            OnCampfireBurnedOut += DisableParticles;
         }
 
         private void Start()
@@ -87,16 +91,18 @@ namespace Resources.Scripts.Campfire
             StopCoroutine(_burningCoroutine);
         }
 
-        public bool Replenish()
+        public void Replenish()
         {
-            if (_currentStage >= campfireData.StagesAmount) return false;
+            if (_currentStage >= campfireData.StagesAmount) return;
 
-            if (_currentStage <= 0 && !campfireData.HasBeenLit) return Lit();
+            if (_currentStage <= 0 && !campfireData.HasBeenLit)
+            {
+                Lit();
+                return;
+            }
 
             _currentStage++;
             OnCampfireReplenished?.Invoke(this, EventArgs.Empty);
-            
-            return true;
         }
 
         private bool Lit()
@@ -106,6 +112,16 @@ namespace Resources.Scripts.Campfire
             OnCampfireLit?.Invoke(this, EventArgs.Empty);
 
             return true;
+        }
+
+        private void EnableParticles(object o, EventArgs e)
+        {
+            _campfireParticles.Play();
+        }
+        
+        private void DisableParticles(object o, EventArgs e)
+        {
+            _campfireParticles.Stop();
         }
         
         private void ResetBurning(object o, EventArgs e)

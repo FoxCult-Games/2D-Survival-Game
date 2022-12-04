@@ -6,6 +6,7 @@ using Resources.Scripts.Campfire;
 using Resources.Scripts.Resources;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Resources.Scripts.Player
 {
@@ -16,6 +17,8 @@ namespace Resources.Scripts.Player
         
         private Vector2 _velocity;
         private float _lastDash = -100f;
+
+        [SerializeField] private UnityEvent onPlayerMove;
 
         private void Awake()
         {
@@ -38,6 +41,7 @@ namespace Resources.Scripts.Player
         private void Move(Vector2 direction)
         {
             transform.Translate(direction * (playerData.MoveSpeed * Time.fixedDeltaTime));
+            onPlayerMove.Invoke();
         }
         
         private void Dash()
@@ -50,14 +54,8 @@ namespace Resources.Scripts.Player
 
         private void Interact()
         {
-            if (CampfireController.Instance != null && CampfireController.Instance.playerInRange)
-            {
-                CampfireController.Instance.Replenish();
-            } 
-            else if (ResourcesManagers.Instance.ClosestResourceInRange(transform.position) != null)
-            {
-                ResourcesManagers.Instance.ClosestResourceInRange(transform.position)?.Collect();
-            }
+            if(InteractableManager.Instance.FocusedInteractable) 
+                InteractableManager.Instance.FocusedInteractable.Interact();
         }
 
         private void OnEnable()
