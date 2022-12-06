@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MinMaxCurve = UnityEngine.ParticleSystem.MinMaxCurve;
 
 namespace Resources.Scripts.SO
 {
@@ -12,35 +13,16 @@ namespace Resources.Scripts.SO
         [SerializeField] private Color[] colors;
         [SerializeField] private AnimationClip unlitAnimation;
         [SerializeField] private AnimationClip[] animations;
+        [SerializeField] private CampfireParticles[] particles;
         [SerializeField] private float lifeTime;
         [SerializeField] private float heatRadius;
-        [SerializeField] private CampfireState state;
-        
-        [SerializeField] private bool hasBeenLit;
         
         public int StagesAmount => stagesAmount;
         public float LifeTime => lifeTime;
         public float HeatRadius => heatRadius;
-        public CampfireState State => state;
-        
-        public bool HasBeenLit => hasBeenLit;
-
-        public void Init()
-        {
-            hasBeenLit = false;
-            state = CampfireState.NOT_LIT;
-        }
-        
-        public void SetState(CampfireState newState)
-        {
-            state = newState;
-            if(newState == CampfireState.BURNING) hasBeenLit = true;
-        }
-
-        public AnimationClip SetVisuals(int stage, bool useColor = false)
-        {
-            return stage == 0 ? unlitAnimation : animations[stagesAmount - stage];
-        }
+        public AnimationClip UnlitAnimation => unlitAnimation;
+        public AnimationClip[] Animations => animations;
+        public CampfireParticles[] Particles => particles;
         
         private void OnValidate()
         {
@@ -48,15 +30,18 @@ namespace Resources.Scripts.SO
             
             Color[] newColors = new Color[stagesAmount];
             AnimationClip[] newAnimations = new AnimationClip[stagesAmount];
+            CampfireParticles[] newParticles = new CampfireParticles[stagesAmount];
 
             for (int i = 0; i < newColors.Length; i++)
             {
                 newColors[i] = i < colors.Length ? colors[i] : Color.white;
-                newAnimations[i] = i < animations.Length ? animations[i] : null;
+                newAnimations[i] = i < animations.Length ? animations[i] : new AnimationClip();
+                newParticles[i] = i < particles.Length ? particles[i] : new CampfireParticles();
             }
             
             colors = newColors;
             animations = newAnimations;
+            particles = newParticles;
         }
     }
 
@@ -65,6 +50,20 @@ namespace Resources.Scripts.SO
         NOT_LIT,
         BURNING,
         BURNT,
+    }
+
+    [Serializable]
+    public struct CampfireParticles
+    {
+        [SerializeField] private int stage;
+        [SerializeField] private float particlesAmount;
+        [SerializeField] private MinMaxCurve particlesSize;
+        [SerializeField] private float particlesSpeed;
+        
+        public int Stage => stage;
+        public float ParticlesAmount => particlesAmount;
+        public MinMaxCurve ParticlesSize => particlesSize;
+        public float ParticlesSpeed => particlesSpeed;
     }
 }
 

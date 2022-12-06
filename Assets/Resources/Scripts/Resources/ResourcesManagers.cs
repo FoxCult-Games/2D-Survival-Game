@@ -54,7 +54,7 @@ namespace Resources.Scripts.Resources
         {
             if(_resourcesInRange.Count == 0) return null;
             
-            Resource closestResource = default;
+            Resource closestResource = default!;
             float closestDistance = Mathf.Infinity;
             
             foreach (Resource resource in _resourcesInRange)

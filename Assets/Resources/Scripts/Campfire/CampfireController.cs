@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using Resources.Scripts.SO;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
@@ -18,6 +19,8 @@ namespace Resources.Scripts.Campfire
         private ParticleSystem _campfireParticles;
         private float _lightIntensity;
         private float _lightRange;
+        private bool hasBeenLit = false;
+        private CampfireState state;
         
         public event EventHandler<EventArgs> OnCampfireLit; 
         public event EventHandler<EventArgs> OnCampfireExtinguished;
@@ -57,7 +60,7 @@ namespace Resources.Scripts.Campfire
 
         private void Start()
         {
-            campfireData.Init();
+            Init();
             _currentStage = 0;
             ChangeState(this, EventArgs.Empty);
         }
@@ -68,11 +71,19 @@ namespace Resources.Scripts.Campfire
                 
             _campfireLight.intensity = _lightIntensity * ((float)_currentStage / campfireData.StagesAmount);
             _campfireLight.pointLightOuterRadius = _lightRange * ((float)_currentStage / campfireData.StagesAmount);
+
+            ParticleSystem.MainModule campfireParticlesMain = _campfireParticles.main;
+            ParticleSystem.EmissionModule campfireParticlesEmission = _campfireParticles.emission;
+            CampfireParticles campfireParticles = campfireData.Particles.ToList().FirstOrDefault(stages => stages.Stage == _currentStage);
+            
+            campfireParticlesMain.startSize = campfireParticles.ParticlesSize;
+            campfireParticlesMain.startSpeed = campfireParticles.ParticlesSpeed;
+            campfireParticlesEmission.rateOverTime = campfireParticles.ParticlesAmount;
         }
         
         private void ChangeState(object sender, EventArgs e)
         {
-            AnimationClip newVisual = campfireData.SetVisuals(_currentStage);
+            AnimationClip newVisual = SetVisuals(_currentStage);
             ChangeVisuals(newVisual);
         }
         
@@ -95,7 +106,7 @@ namespace Resources.Scripts.Campfire
         {
             if (_currentStage >= campfireData.StagesAmount) return;
 
-            if (_currentStage <= 0 && !campfireData.HasBeenLit)
+            if (_currentStage <= 0 && !hasBeenLit)
             {
                 Lit();
                 return;
@@ -105,13 +116,11 @@ namespace Resources.Scripts.Campfire
             OnCampfireReplenished?.Invoke(this, EventArgs.Empty);
         }
 
-        private bool Lit()
+        private void Lit()
         {
             _currentStage = campfireData.StagesAmount;
-            campfireData.SetState(CampfireState.BURNING);
+            state = CampfireState.BURNING;
             OnCampfireLit?.Invoke(this, EventArgs.Empty);
-
-            return true;
         }
 
         private void EnableParticles(object o, EventArgs e)
@@ -128,6 +137,17 @@ namespace Resources.Scripts.Campfire
         {
             StopBurning();
             _burningCoroutine = StartCoroutine(Burning());
+        }
+
+        public void Init()
+        {
+            hasBeenLit = false;
+            state = CampfireState.NOT_LIT;
+        }
+
+        public AnimationClip SetVisuals(int stage, bool useColor = false)
+        {
+            return stage == 0 ? campfireData.UnlitAnimation : campfireData.Animations[campfireData.StagesAmount - stage];
         }
         
         private IEnumerator Burning()

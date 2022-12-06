@@ -24,7 +24,88 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
   - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
   - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
-  lifeTime: 3
+  particles:
+  - stage: 4
+    particlesAmount: 6
+    particlesSize:
+      m_Mode: 0
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: 0
+      m_ConstantMax: 0.3
+    particlesSpeed: 0.5
+  - stage: 3
+    particlesAmount: 5
+    particlesSize:
+      m_Mode: 0
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: 0
+      m_ConstantMax: 0.24
+    particlesSpeed: 0.46
+  - stage: 2
+    particlesAmount: 4
+    particlesSize:
+      m_Mode: 0
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: 0
+      m_ConstantMax: 0.2
+    particlesSpeed: 0.4
+  - stage: 1
+    particlesAmount: 3
+    particlesSize:
+      m_Mode: 0
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: 0
+      m_ConstantMax: 0.15
+    particlesSpeed: 0.35
+  lifeTime: 6
   heatRadius: 0
-  state: 0
-  hasBeenLit: 0
+  state: 1
+  hasBeenLit: 1
