@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Resources.Scripts;
-using Resources.Scripts.Campfire;
-using Resources.Scripts.Resources;
-using UnityEditor;
+using Resources.Scripts.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 

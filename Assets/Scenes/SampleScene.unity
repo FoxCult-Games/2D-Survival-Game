@@ -6524,3 +6524,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedInteractable: {fileID: 0}
+  interactUI: {fileID: 2434650226537297347, guid: dd38a3c6a5ee9854f9370313137e9c20, type: 3}
