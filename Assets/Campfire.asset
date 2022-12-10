@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: f625f5aa83a69284a92ad2919787df7b, type: 2}
   - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
   - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
-  - {fileID: 7400000, guid: 2bdd04cc9017b70488af5ee169013bd1, type: 2}
+  - {fileID: 7400000, guid: 8b54e192a1418084f9d20741bf962955, type: 2}
   particles:
   - stage: 4
     particlesAmount: 6
@@ -107,5 +107,3 @@ MonoBehaviour:
     particlesSpeed: 0.35
   lifeTime: 6
   heatRadius: 0
-  state: 1
-  hasBeenLit: 1

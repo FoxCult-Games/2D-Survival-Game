@@ -29,6 +29,7 @@ namespace Resources.Scripts.Interaction
 
             if (!_player || _interactablesInRange.Count == 0)
             {
+                if(focusedInteractable) focusedInteractable.Unfocus();
                 focusedInteractable = null;
                 return;
             }

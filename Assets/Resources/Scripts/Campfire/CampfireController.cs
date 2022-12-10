@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Resources.Scripts.Interaction;
 using Resources.Scripts.SO;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
 
 namespace Resources.Scripts.Campfire
 {
+    [RequireComponent(typeof(Interactable))]
     public class CampfireController : MonoBehaviour
     {
         [SerializeField] private SO.Campfire campfireData;
         private GameObject _campfireGameObject;
+        private Interactable _interactable;
 
         private Light2D _campfireLight;
         private Animator _campfireAnimator;
@@ -41,6 +44,8 @@ namespace Resources.Scripts.Campfire
             
             _campfireGameObject = GameObject.FindGameObjectWithTag("Campfire");
             _campfireParticles = _campfireGameObject.GetComponentInChildren<ParticleSystem>();
+
+            _interactable = GetComponent<Interactable>();
             
             _campfireLight = _campfireGameObject.GetComponent<Light2D>();
             _campfireAnimator = _campfireGameObject.GetComponent<Animator>();
@@ -83,6 +88,9 @@ namespace Resources.Scripts.Campfire
         
         private void ChangeState(object sender, EventArgs e)
         {
+            if (_currentStage != 4) _interactable.Enable();
+            else _interactable.Disable();
+            
             AnimationClip newVisual = SetVisuals(_currentStage);
             ChangeVisuals(newVisual);
         }

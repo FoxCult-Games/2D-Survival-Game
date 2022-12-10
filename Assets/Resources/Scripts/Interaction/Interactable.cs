@@ -14,6 +14,7 @@ namespace Resources.Scripts.Interaction
         private SpriteRenderer _spriteRenderer;
         
         [SerializeField] private float interactionTime = 2f;
+        private bool _isEnabled = true;
         [SerializeField] private bool isInteracting = false;
         [SerializeField] private bool isInRange = false;
         [SerializeField] private bool isFocused = false;
@@ -42,6 +43,8 @@ namespace Resources.Scripts.Interaction
 
         public void Focus()
         {
+            if (isInteracting) return;
+            
             SpawnInteractionUI();
             isFocused = true;
         }
@@ -54,19 +57,21 @@ namespace Resources.Scripts.Interaction
 
         public void Interact()
         {
-            if (isInRange && isFocused && !isInteracting)
-            {
-                isInteracting = true;
-                onInteract.Invoke();
-            }
+            if (!_isEnabled || !isInRange || !isFocused || isInteracting) return;
+            
+            isInteracting = true;
+            RemoveInteractionUI();
+            onInteract.Invoke();
         }
 
         private void SpawnInteractionUI()
         {
+            if (!_isEnabled) return;
+            
             Vector2 position = transform.position;
             GameObject interactUI = Instantiate(
                 _interactableManager.GetInteractUI(), 
-                new Vector2(position.x, position.y + (_spriteRenderer.size.y / 2)), 
+                new Vector2(position.x, position.y + _spriteRenderer.size.y), 
                 Quaternion.identity,
                 transform
             );
@@ -76,11 +81,14 @@ namespace Resources.Scripts.Interaction
 
         private void RemoveInteractionUI()
         {
-            Destroy(transform.GetComponentInChildren<InteractionBox>().gameObject);
+            GameObject interactionUI = transform.GetComponentInChildren<InteractionBox>()?.gameObject;
+            if(interactionUI) Destroy(interactionUI);
         }
 
         private void PlayInteractAnimation(GameObject interactUI)
         {
+            if (!_isEnabled) return;
+            
             Animator animator = interactUI.GetComponent<Animator>();
             animator.Play("Interaction Box Opening");
         }
@@ -119,5 +127,9 @@ namespace Resources.Scripts.Interaction
             onInteractEnd.Invoke();
             isInteracting = false;
         }
+
+        public bool IsEnabled() => _isEnabled;
+        public void Enable() => _isEnabled = true;
+        public void Disable() => _isEnabled = false;
     }
 }
